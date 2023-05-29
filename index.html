@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Hello wasm-pack!</title>
+    <link rel="stylesheet" href="css/chessboard-1.0.0.min.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="js/chessboard-1.0.0.min.js"></script>
   </head>
   <body>
-    <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
-    <script src="./bootstrap.js"></script>
+    <div id="board" style="width: 400px"></div>
+    <button id="startBtn">Start Position</button>
+    <button id="clearBtn">Clear Board</button>
+    <script>
+      var board = Chessboard("board", {
+        draggable: true,
+        dropOffBoard: "trash",
+        sparePieces: true,
+      });
+
+      $("#startBtn").on("click", board.start);
+      $("#clearBtn").on("click", board.clear);
+    </script>
   </body>
 </html>
