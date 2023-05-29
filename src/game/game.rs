@@ -1,24 +1,27 @@
+use serde::{Deserialize, Serialize};
+
 use super::{
     board::{get_piece_for_default_position, Board, Coordinate, Square},
     player::Player,
 };
 
+#[derive(Copy, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Color {
     White,
     Black,
 }
 
-pub struct Game<'a> {
-    state: String,
-    player_one: &'a Player,
-    player_two: &'a Player,
-    cur_player: &'a Player,
+#[derive(Serialize, Deserialize)]
+pub struct Game {
+    player_one: Player,
+    player_two: Player,
+    cur_player: Option<Player>,
     turn: usize,
     board: Board,
 }
 
-impl<'a> Game<'a> {
-    pub fn new(player_one: &'a Player, player_two: &'a Player) -> Self {
+impl Game {
+    pub fn new(player_one: Player, player_two: Player) -> Self {
         let mut squares = vec![Vec::with_capacity(8)];
         for i in 0..8 {
             let mut row = Vec::new();
@@ -31,10 +34,9 @@ impl<'a> Game<'a> {
         }
         let board = Board::new(squares);
         Game {
-            state: String::new(),
             player_one,
             player_two,
-            cur_player: player_one,
+            cur_player: None,
             turn: 1,
             board,
         }

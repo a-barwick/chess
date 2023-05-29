@@ -1,6 +1,9 @@
+use serde::{Deserialize, Serialize};
+
 use super::{board::Coordinate, game::Color, ruleset::get_available_moves};
 
-pub enum Kind {
+#[derive(Serialize, Deserialize)]
+pub enum PieceType {
     Pawn,
     Rook,
     Knight,
@@ -9,15 +12,16 @@ pub enum Kind {
     King,
 }
 
+#[derive(Serialize, Deserialize)]
 pub struct Piece {
-    kind: Kind,
-    color: Color,
-    position: Coordinate,
-    is_alive: bool,
+    pub kind: PieceType,
+    pub color: Color,
+    pub position: Coordinate,
+    pub is_alive: bool,
 }
 
 impl Piece {
-    pub fn new(kind: Kind, color: Color, position: Coordinate) -> Self {
+    pub fn new(kind: PieceType, color: Color, position: Coordinate) -> Self {
         Piece {
             kind,
             color,
