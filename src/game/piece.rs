@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use super::{board::Coordinate, game::Color, ruleset::get_available_moves};
+use super::{board::Coordinate, game::Color};
 
 #[derive(Serialize, Deserialize)]
 pub enum PieceType {
@@ -31,7 +31,8 @@ impl Piece {
     }
 
     pub fn get_available_moves(&self) -> Option<Vec<Coordinate>> {
-        get_available_moves(&self.kind, &self.position)
+        // get_available_moves(&self.kind, &self.position)
+        None
     }
 
     pub fn is_players(&self, color: Color) -> bool {
